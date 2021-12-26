@@ -43,6 +43,11 @@ public class JDBC_TemplateClassicApp1 {
         DaoUtils.printSuccessFailure(DaoUtils.updateOperation,isUpdated);
         DaoUtils.printOrganization(dao.getOrganization(4),DaoUtils.updateOperation);
 
+        //delete an organization
+        Organization deleteOrg = dao.getOrganization(2);
+        boolean isDeleted  = dao.remove(deleteOrg);
+        DaoUtils.printSuccessFailure(DaoUtils.deleteOperation,isDeleted);
+        DaoUtils.printOrganizations(dao.getAll(),DaoUtils.deleteOperation);
 
         //Cleaning up the table organization
         dao.cleanup(); //comment this line to transfer the information into the database

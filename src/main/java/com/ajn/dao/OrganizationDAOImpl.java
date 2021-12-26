@@ -62,8 +62,9 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 
 	@Override
 	public boolean remove(Organization org) {
-		// TODO Auto-generated method stub
-		return false;
+		String query = "DELETE FROM organization WHERE id= ?";
+		Object[] orgRemove = new Object[]{org.getId()};
+		return jdbcTemplate.update(query,orgRemove) == 1;
 	}
 
 	@Override
