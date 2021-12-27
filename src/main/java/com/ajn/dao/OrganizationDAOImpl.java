@@ -53,7 +53,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 
 	@Override
 	public List<Organization> getAll() {
-		String query = "SELECT * from organization";
+		String query = "SELEC * from organization";
 		
 		//here, query gets the entire list of the database via a sql query and through a rowMapper.
 		List<Organization> orglist = jdbcTemplate.query(query, new OrganizationRowMapper());

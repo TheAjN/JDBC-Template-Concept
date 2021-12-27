@@ -5,10 +5,11 @@ import com.ajn.dao.OrganizationDAO;
 import com.ajn.domain.Organization;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
-public class JDBC_TemplateClassicApp1 {
+public class JDBC_TemplateExceptionApp {
 
     public static void main(String[] args) {
 
@@ -19,7 +20,7 @@ public class JDBC_TemplateClassicApp1 {
         //Create the bean
         OrganizationDAO dao = (OrganizationDAO) ctx.getBean("orgDao");
 
-        //Creating seed data
+    /*    //Creating seed data
 	    DaoUtils.createSeedData(dao);
 
         //Getting the list of Organizations and printing it
@@ -53,14 +54,19 @@ public class JDBC_TemplateClassicApp1 {
         dao.cleanup(); //comment this line to transfer the information into the database
         DaoUtils.printOrganizationCount(dao.getAll(),DaoUtils.cleanupOperation);
 
-		/*
+		*//*
 		List<Organization> orgList = dao.getAll();
 		for(Organization org : orgList) {
 
 			System.out.println(org);
 		}*/
-
-
+            List<Organization> organizationList = null;
+        try{
+            organizationList = dao.getAll();
+        }catch (DataAccessException dae){
+            System.out.println("EXCEPTION MESSAGE: "+dae.getMessage());
+            System.out.println("EXCEPTION CLASS: "+dae.getClass());
+        }
 
         ((ClassPathXmlApplicationContext) ctx).close();
 
